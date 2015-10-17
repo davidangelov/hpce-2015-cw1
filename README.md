@@ -39,7 +39,7 @@ For now, you only really need to worry about the following:
 
 1. This document and supporting code are part of a **repository**
     called `hpce-2015-cw1`.
-    
+
 2. The repository tracks changes I make to files in the repository,
     recording each set of changes as a **commit**.
 
@@ -48,11 +48,11 @@ For now, you only really need to worry about the following:
 
 4. You need to **clone** the remote repository to get a "local" or "working"
     repository, which is a copy of the files that you can work with and modify.
-    
+
 5. If I make changes to the remote repository on github,
     you can **pull** those changes so that your local copy
     is updated.
-    
+
 For more information on git, and how you can work with
 repositories, see this brief [intro to Git](background-git.md).
 
@@ -91,14 +91,14 @@ exactly the same output as a previous function, or there is
 a known good output against which it can be compared.
 The only notes I'll make are:
 
-- Checking image `im1` is identical to image `im2` is as simple 
+- Checking image `im1` is identical to image `im2` is as simple
   as `assert(all(all(im1==im2)))`.
 
 - I _am_ forcing you to test functions for different parameters,
   and to check old against new. It would be trivial to create
   a function that _compares_ the output of two functions, rather
   than meauring execution times.
-  
+
 - Interesting test-inputs are generally "0", "1", "2", and "many",
   which is true for image widths and heights, as well as kernel
   sizes.
@@ -158,10 +158,10 @@ Previous submissions have seen people:
 
 2. Printing graphs, then taking a photo with their camera,
    then converting to pdf.
-   
+
 3. Same as above, but using a scanner (looks ok, but ends
    up with an 8MB file).
-   
+
 Please don't be that person. There is a `File -> Save As`
 option on matlab figures, which supports direct pdf generation.
 Unless you have a huge number of points in your plot you
@@ -189,9 +189,9 @@ additional accuracy constraints:
 ``` matlab
 function [t]=function_time(f)
 % function_time Return the execution time for a single execution of f() in seconds
-% 
+%
 %  f : A function with no inputs
-% 
+%
 % The timing accuracy is 10% or better. So if the true time is
 % "t" and the measured time is "m", it should attempt to ensure
 % that abs((m-t)/t) < 0.1". This function supports
@@ -201,9 +201,9 @@ function [t]=function_time(f)
 % The user of this function takes on responsibility for
 % making sure that the machine is not loaded, and that
 % frequency scaling is turned off.
-%    
+%
 % Examples:
-%  
+%
 % > f=@()( sin(1) );  timing.function_time(f)
 %
 % > timing.function_time(@()( randn(1000)*randn(1000) ) )
@@ -215,7 +215,7 @@ Hints:
 
 - What do you need to do for "fast" functions to ensure start-up costs and
   timing resolution are compensated for?
-  
+
 - How do you make sure that "slow" functions are still timed "efficiently"?
 
 ### E1.2 - Scaling of performance
@@ -231,7 +231,7 @@ function [ts,ns]=function_time_against_n(f, ns, maxTime)
 %            is assumed to increase monotonically (approximately) with n.
 %  ns      : A vector of monotonically increasing positive integers.
 %  maxTime : Maximum amount of time the function should take (default == 3 seconds)
-%  
+%
 %  This function calculates the changing execution time for a
 %  function of a single parameter, as that parameter takes on
 %  a vector of increasing values. The total time used to calculate
@@ -327,13 +327,14 @@ The Scharr edge detection kernel is a Sobel-like operator that
 determines how "edgey" a pixel is http://en.wikipedia.org/wiki/Sobel_operator.
 
 Add a function `+effects/scharr_scalar.m` which implements a per-pixel
-edge detection kernel. The function should calclate the vertical
-and horizontal strength G_x and G_y, then combine them into the
+edge detection kernel. The function should calculate the vertical
+and horizontal strength G_x and G_y (as defined in the [Formulation](https://en.wikipedia.org/wiki/Sobel_operator#Formulation)
+section of the wikipedia article), then combine them into the
 output pixel using the mapping:
 
     G = sqrt(G_x^2+G_y^2);
     pixel = min(G/8, 1);
-    
+
 An example of reference output is included as `+effects/cameraman.scharr.ref.png`,
 which I generated using the code:
 
@@ -361,8 +362,8 @@ Hint:
 - Start from the blur kernel
 
 - Handle just the horizontal or vertical direction first, then work
-  on combining them together.  
-  
+  on combining them together.
+
 - Use the reference image as a comparison against yours. You can
   easily load images and subtract them.
 
@@ -373,7 +374,7 @@ Hint:
       all(all( abs(ref-got) < 0.01 ))
 
   to compare them.
-  
+
 _Note: the expectation is that it is possible to get exactly the same results,
 but don't worry if you can't; move on and tackle the later parts, then come
 back later._
@@ -416,7 +417,7 @@ Hints:
 
 - You can use [`reshape`](http://uk.mathworks.com/help/matlab/ref/reshape.html) to
   flatten the input pixels, for example turning a 3x3 array into a 1x9 array for input to `median`.
-  
+
 - Or matlab also allows [linear indexing](http://uk.mathworks.com/help/matlab/math/matrix-indexing.html)
   into two dimensional arrays. For example, try `x=[1 0 1; 2 0 2; 9 9 9], x(1:9)`.
 
@@ -472,7 +473,7 @@ quite high, so we need to make sure that:
 
 - Or, the functional gain due to abstraction is worth the performance
   hit.
-  
+
 - Or, ideally, both.
 
 
@@ -523,7 +524,7 @@ Some things that you might see happening (in matlab r2014a):
 
 - If you have a CPU activity monitor running, the CPU should spike
   up on all CPUs, with copies of matlab running on each.
-  
+
 - If you use a processor or task monitor, you can see extra copies
   of matlab which are just hanging around in the background.
 
@@ -630,7 +631,7 @@ more parallel iterations. As we've seen, there is a cost associated
 with doing something in parallel, so more parallel iterations seems
 bad. However, as the image gets bigger, there are also more columns,
 which means that the inner sequential for loop contains more and
-more work. 
+more work.
 
 So even for the very lightweight inversion, it is entirely
 possible we'll get a speed-up as we scale up width and height:
@@ -762,11 +763,11 @@ can be attributed to various types of overhead being reduced:
   often map to many hundreds of machine instructions. Once vectorised,
   the loop is lowered to compiled C code, which can get close
   to one machine instruction per operation.
-  
+
 - Abstraction overhead: we wrappd the kernel inside a function
   handle, so there is some overead involved in unpacking the function
   for each pixel. This overhead now only happens once per vector.
-  
+
 If we consider the loops and the overheads, the original looked
 like this:
 
@@ -892,14 +893,14 @@ the interpreted x loop is in apply_scalar, outside the abstraction:
         Overhead: interpreter
         for x
             Overhead: interpreter
-            Overhead: f -> median_scalar abstraction 
+            Overhead: f -> median_scalar abstraction
             Work: extract pixels, run median
 
 or to have the x loop inside the abstraction:
 
-    for y   
+    for y
         Overhead: interpreter
-        Overhead: f -> median_vector abstraction 
+        Overhead: f -> median_vector abstraction
         for x
             Overhead: interpreter
             Work: extract pixels, run median
@@ -910,13 +911,13 @@ Does it match the results?
 ### 4.4 Properly vectorise (median)
 
 _Don't worry if you can't get this working, it is
-more a matlab skill than a general HPC technique_. 
+more a matlab skill than a general HPC technique_.
 
 It is actually possible to fully vectorise median_scalar, though
 it requires some mental gyrations. This can be somewhat
 tricky to get right if you don't know matlab well, and to
 a certain extent these tricks are mainly to get round the
-speed problems of the matlab interpreter. 
+speed problems of the matlab interpreter.
 
 So create a function `+effects/median_vector` which is a true
 vectorised version of `+effects/median_vector`. It should have
@@ -939,10 +940,10 @@ Hints:
 
 - Draw pictures. What matrix of pixels do you need to pass to `median`? What
   are the indices of those pixels within the original image?
-  
+
 - Think about linear indexing. How can you create a vector of
   linear indices which pulls out the pixels you want?
-   
+
 Assuming you can get this working, check the effect on performance
 as the image size goes up:
 
@@ -1071,7 +1072,7 @@ Hints:
   int terms of performance) if you select just the input
   region needed within one parallel iteration at the start
   of each parallel iteration, then only read from that matrix.
-  
+
 - Draw pictures of the for loops and matrices.
 
 ### 5.3 - Optimal version
