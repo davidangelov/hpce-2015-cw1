@@ -115,8 +115,8 @@ can be called from within matlab as `wibble.wobble`. For more
 information, search the matlab documentation for "Packages Create Namespaces".
 
 This coursework assumes that your matlab current directory is
-set to the same directory as _this_ file (`spec.md`). You
-can check this by typing `ls('spec.md')` into the matlab
+set to the same directory as _this_ file (`README.md`). You
+can check this by typing `ls('README.md')` into the matlab
 prompt. If it can't find the file, you need to change your
 directory.
 
