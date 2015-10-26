@@ -246,9 +246,9 @@ function [ts,ns]=function_time_against_n(f, ns, maxTime)
 %  > f=@(n)( randn(n).^2 );
 %  > timing.function_time_against_n(f, 1:20)
 %
-%  > [ts,ns]=timing.function_time_against_n(@(n)( randn(10)^n, 1:20) ); plot(ns,ts);
+%  > [ts,ns]=timing.function_time_against_n(@(n)( randn(10)^n ), 1:20 ); plot(ns,ts);
 %
-%  > [ts,ns]=timing.function_time_against_n(@(n)( inv(randn(n), 1:100), 10.0)  % Increase maxTime
+%  > [ts,ns]=timing.function_time_against_n(@(n)( inv(randn(n)) ), 1:100, 10.0)  % Increase maxTime
 ```
 
 Hints:
