@@ -115,8 +115,8 @@ can be called from within matlab as `wibble.wobble`. For more
 information, search the matlab documentation for "Packages Create Namespaces".
 
 This coursework assumes that your matlab current directory is
-set to the same directory as _this_ file (`spec.md`). You
-can check this by typing `ls('spec.md')` into the matlab
+set to the same directory as _this_ file (`README.md`). You
+can check this by typing `ls('README.md')` into the matlab
 prompt. If it can't find the file, you need to change your
 directory.
 
@@ -246,9 +246,9 @@ function [ts,ns]=function_time_against_n(f, ns, maxTime)
 %  > f=@(n)( randn(n).^2 );
 %  > timing.function_time_against_n(f, 1:20)
 %
-%  > [ts,ns]=timing.function_time_against_n(@(n)( randn(10)^n, 1:20) ); plot(ns,ts);
+%  > [ts,ns]=timing.function_time_against_n(@(n)( randn(10)^n ), 1:20 ); plot(ns,ts);
 %
-%  > [ts,ns]=timing.function_time_against_n(@(n)( inv(randn(n), 1:100), 10.0)  % Increase maxTime
+%  > [ts,ns]=timing.function_time_against_n(@(n)( inv(randn(n)) ), 1:100, 10.0)  % Increase maxTime
 ```
 
 Hints:
