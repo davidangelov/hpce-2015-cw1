@@ -1,4 +1,4 @@
-function [ output_args ] = plot_function_time_against_n( fs, ns, maxTime )
+function plot_function_time_against_n( fs, ns, maxTime )
 % plot_function_time_against_n Times and plots the execution times of one
 % or more functions.
 %
@@ -51,7 +51,7 @@ arch= computer('arch');
 % Try to adapt to different matlab versions
 % Start older
 try
-    matlabpool SIZE;
+    parpool SIZE;
     nWorkers=ans;
 catch
     nWorkers=nan();

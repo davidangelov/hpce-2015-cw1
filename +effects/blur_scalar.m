@@ -8,6 +8,7 @@ function [out]=blur_scalar(in)
 out=               in(1,2)           ...
        + in(2,1)+4*in(2,2)+in(2,3)   ...
                  + in(3,2);
+             
 
 out=out / 8; % normalise down
 
